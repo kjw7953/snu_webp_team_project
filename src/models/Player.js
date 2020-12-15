@@ -17,7 +17,7 @@ const schema = new Schema({
   y: { type: Number, default: 0 },
   beforex: { type: Number, default: 0 },
   beforey: { type: Number, default: 0 },
-  mapVisitedList: [new Schema({ boolean: Boolean })],
+  mapVisitedList: [Number],
   checkPointX: { type: Number, default: 0 },
   checkPointY: { type: Number, default: 0 },
   items: [Number],

@@ -66,6 +66,7 @@ class MonsterManager extends Manager {
 
     datas.forEach((monster) => {
       this.monsters[monster.id] = {
+        mId: monster.id,
         name: monster.name,
         hp: monster.hp,
         def: monster.def,

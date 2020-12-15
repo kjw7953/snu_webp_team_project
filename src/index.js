@@ -25,6 +25,27 @@ mongoose.connect(
 
 require("./components/basic.js")();
 
+const getItem = async (id, name) => {
+  // id = item.id, name = player.name
+  const player = await Player.findOne({ name });
+  if (player.items.find((item) => item === id) !== undefined) {
+    return;
+  }
+  const item = itemManager.getItem(id);
+  console.log(`${item.name}을 얻었다.`);
+
+  Object.keys(item)
+    .slice(1)
+    .forEach((stat) => {
+      if (item[stat] !== undefined) {
+        player[stat] += item[stat];
+      }
+    });
+
+  player.items.push(id);
+  await player.save();
+};
+
 const authentication = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) return res.sendStatus(401);
@@ -116,32 +137,28 @@ app.post("/throwDice", authentication, async (req, res) => {
 });
 
 app.post("/action", authentication, async (req, res) => {
-  const { action, battleTurn, id, mHP, mId } = req.body;
-  console.log();
-  console.log();
+  const { action, battleTurn, mId, mHP } = req.body;
+
   const player = req.player;
   let event = null;
   let field = null;
   let monster = null;
   let movAble = [];
   let count = req.body.count;
-  console.log(req.body);
-  // console.log(
-  //   `action : [${action}], battleTurn : [${battleTurn}], count : [${count}]`
-  // );
+  //console.log(req.body);
+  console.log(
+    `action : [${action}], count : [${count}]`
+  );
 
   field = mapManager.getField(req.player.x, req.player.y);
   event = eventHandler(field.events, player);
   if (action === "query") {
-    console.log("query");
     console.log(player.x);
     count = 0;
   } else if (action === "runaway") {
-    console.log("runaway");
     //준평 : 도망가기 버튼을 누르면 이쪽 블락의 코드가 실행됩니다.
     //준평 : 도망가는거 처리 코드 여기다 작성해주시면 됩니다.
   } else if (action === "move") {
-    console.log("move");
     count = 0;
     const direction = parseInt(req.body.direction, 0); // 0 북. 1 동 . 2 남. 3 서.
     let x = player.x;
@@ -155,8 +172,6 @@ app.post("/action", authentication, async (req, res) => {
       res.sendStatus(400);
     }
 
-    player.beforex = player.x;
-    player.beforey = player.y;
     player.x = x;
     player.y = y;
     field = mapManager.getField(player.x, player.y); //field 업데이트
@@ -170,29 +185,49 @@ app.post("/action", authentication, async (req, res) => {
 
     await player.save();
   } else if (action === "battle" && battleTurn) {
-    console.log("전투 턴입니다!1");
-    if (mHP > 0) {
-      monster = await battleHandler("battle", mId, player, mHP);
-    } else monster = await battleHandler("battle", mId, player);
-    console.log("here");
+    monster = await battleHandler(mId, player, mHP);
   } else if (action === "battle") {
-    monster = monsterManager.getMonster(id);
-    console.log("여기");
-  } else if (action === "item") {
-    console.log("item");
-  } else {
-    console.log("count is " + count + " event length is " + event.length);
+    monster = monsterManager.getMonster(mId);
+
+  } else if (action === "event") {
+    let mapId = mapManager.getField(player.x, player.y).id
+    const isHave = player.mapVisitedList.filter((num) => num === Number(mapId));
+    let currentEvent = await eventManager.getEvent(event[count-1].id)
+    
+    if (isHave.length === 0) {
+      if (typeof currentEvent.checkpoint !== "undefined") {
+        player.checkPointX = x;
+        player.checkPointY = y;
+      }
+      
+      let pNum = Number(currentEvent.percentage)
+      if (pNum === 100 || pNum > Math.random() * 100) {
+        if (typeof currentEvent.maxHp == "undefined" && currentEvent.maxHp == null)
+          player.maxHp += Number(currentEvent.maxHp)
+        if (typeof currentEvent.hp !== "undefined")
+          player.HP += Number(currentEvent.HP)
+        if (typeof currentEvent.def !== "undefined")
+          player.def += Number(currentEvent.def)
+        if (typeof currentEvent.int !== "undefined"){
+          console.log('this block')
+          player.int += Number(currentEvent.int)
+        }
+        if (typeof currentEvent.str !== "undefined")
+          player.str += Number(currentEvent.str)
+      }
+      player.mapVisitedList.push(mapId);
+      console.log(player.mapVisitedList)
+      await player.save();
+    }
   }
   movAble = makeDirection(field, req);
-  console.log("최종");
-  console.log(monster);
+
   return res.send({ player, field, event, movAble, count, monster });
 });
 
 app.post("/item", authentication, async (req, res) => {
-  const { field, event, movAble, count, id } = req.body;
+  const { field, event, movAble, count } = req.body;
   let player = req.player;
-  itemHandler("get", id, player);
   return res.send({ player, field, event, movAble, count });
 });
 

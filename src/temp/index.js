@@ -138,18 +138,17 @@ app.post("/throwDice", authentication, async (req, res) => {
 
 app.post("/action", authentication, async (req, res) => {
   const { action, battleTurn, mId, mHP } = req.body;
-  console.log();
-  console.log();
+
   const player = req.player;
   let event = null;
   let field = null;
   let monster = null;
   let movAble = [];
   let count = req.body.count;
-  console.log(req.body);
-  // console.log(
-  //   `action : [${action}], battleTurn : [${battleTurn}], count : [${count}]`
-  // );
+  //console.log(req.body);
+  console.log(
+    `action : [${action}], count : [${count}]`
+  );
 
   field = mapManager.getField(req.player.x, req.player.y);
   event = eventHandler(field.events, player);
@@ -189,16 +188,40 @@ app.post("/action", authentication, async (req, res) => {
     monster = await battleHandler(mId, player, mHP);
   } else if (action === "battle") {
     monster = monsterManager.getMonster(mId);
-    
+
   } else if (action === "event") {
-    let currentEvent = await eventManager.getEvent(id)
-    if(typeof currentEvent.checkpoint !== "undefined") {
-      player.checkPointX = x;
-      player.checkPointY = y;
+    let mapId = mapManager.getField(player.x, player.y).id
+    console.log('visited list is ' + player.mapVisitedList + 'map ' + mapId)
+    
+    const isHave = player.mapVisitedList.filter((num) => num === Number(mapId));
+    let currentEvent = await eventManager.getEvent(event[count-1].id)
+    console.log('isHave is ' + isHave.length)
+    if (isHave.length !== 0) {
+      console.log("왔던 맵입니다.");
+      //let currentEvent = await eventManager.getEvent(event[count-1].id)
+      if (typeof currentEvent.checkpoint !== "undefined") {
+        player.checkPointX = x;
+        player.checkPointY = y;
+      }
+      let pNum = Number(currentEvent.percentage)
+      
+      if (pNum < 100 && pNum < Math.random() * 100) {
+        if (typeof currentEvent.maxHp !== "undefined")
+          player.maxHp += Number(currentEvent.maxHp)
+        if (typeof currentEvent.hp !== "undefined")
+          player.HP += Number(currentEvent.HP)
+        if (typeof currentEvent.def !== "undefined")
+          player.def += Number(currentEvent.def)
+        if (typeof currentEvent.int !== "undefined")
+          player.int += Number(currentEvent.int)
+        if (typeof currentEvent.str !== "undefined")
+          player.str += Number(currentEvent.str)
+      }
+      player.mapVisitedList.push(mapId);
+      console.log(player.mapVisitedList)
       await player.save();
     }
     
-
   }
   movAble = makeDirection(field, req);
 
