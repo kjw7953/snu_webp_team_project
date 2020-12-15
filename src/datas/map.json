@@ -1,27 +1,1610 @@
-{
-  "id": 1,
-  "fields": [
-    [0, 0, "평원의 시작점이다.", [0, 1, 1, 0], []],
-    [
+[
+  {
+    "id": 0,
+    "fields": [
+      0,
+      0,
+      [true, true, false, false],
+      "관악산 정상",
+      "과선배에게 붙잡혀 술을 마시고 있었는데... 정신을 차려보니 관악산 정상에 있다. 얼른 서울대 입구역으로 내려가서 집으로 가자."
+    ],
+    "contents": []
+  },
+  {
+    "id": 1,
+    "fields": [
       1,
       0,
-      "왠지 몬스터가 나올 것 같은 그런 스산한 분위기가 느껴진다.",
-      [0, 0, 1, 1],
-      [
-        { "type": "battle", "monster": 1, "percent": 70 },
-        { "type": "item", "item": 1, "percent": 30 }
-      ]
+      [true, true, false, true],
+      "등산로",
+      "무언가 부스럭거린다."
     ],
-    [
+    "contents": [
+      {
+        "type": "battle",
+        "number": 0,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "fields": [
+      2,
+      0,
+      [true, true, false, true],
+      "등산로",
+      "근처에서 부스럭 소리가 나는게 무언가 있는 것 같다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 3,
+    "fields": [
+      3,
+      0,
+      [true, true, false, true],
+      "한 쪽이 끊겨 있는 갈림길",
+      "사슴과 눈이 마주쳤다. 눈빛이 심상치 않다. 일단 살고보자"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 1,
+        "percentage": 100
+      },
+      {
+        "type": "item",
+        "number": 0,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "fields": [
+      4,
+      0,
+      [false, false, false, true],
+      "구덩이",
+      "등산로가 끊어진 것이 아니었다. 지난 장마로 길이 무너져 있었고 그 자리엔 구덩이가 생겼다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 0,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "fields": [
       0,
       1,
-      "행운이 찾아올 것 같다.",
-      [1, 1, 0, 0],
-      [
-        { "type": "item", "item": 1, "percent": 70 },
-        { "type": "battle", "enemy": 1, "percent": 30 }
-      ]
+      [false, true, true, false],
+      "연주암",
+      "마하반야바라밀다심경..."
     ],
-    [1, 1, "아무것도 없다.", [1, 0, 0, 1], [], []]
-  ]
-}
+    "contents": [
+      {
+        "type": "event",
+        "number": 1,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "fields": [
+      1,
+      1,
+      [true, false, true, true],
+      "막혀있는 오솔길",
+      "오솔길이 있지만 철창으로 막혀있고 <멧돼지 출몰 지역>이라고 쓰여 있는 경고판이 있다. 하지만 열 수 있을 것 같은데..?"
+    ],
+    "contents": []
+  },
+  {
+    "id": 7,
+    "fields": [
+      2,
+      1,
+      [true, true, false, false],
+      "수풀",
+      "녹용을 먹으면 똑똑해질까?"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 1,
+        "percentage": 100
+      },
+      {
+        "type": "event",
+        "number": 2,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "fields": [
+      3,
+      1,
+      [true, true, true, true],
+      "등산로",
+      "어디선가 물소리가 들려온다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 9,
+    "fields": [
+      4,
+      1,
+      [true, false, false, true],
+      "계곡",
+      "계곡에서 쉬고 있는 등산객을 만났다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 3,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "fields": [
+      0,
+      2,
+      [true, false, false, false],
+      "깊은 산 속 어딘가",
+      "처음보는 버섯이 있다. 먹어도 될까?"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 4,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "fields": [
+      1,
+      2,
+      [true, true, true, false],
+      "멧돼지 출몰 구역",
+      "곳곳에 멧돼지 발자국이 보인다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 2,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "fields": [
+      2,
+      2,
+      [true, false, false, true],
+      "멧돼지 출몰 구역",
+      "꾸에에에엑~~~~"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 2,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "fields": [
+      3,
+      2,
+      [false, true, true, false],
+      "장뇌삼 재배지",
+      "장뇌삼 재배지를 발견했다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 5,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "fields": [
+      4,
+      2,
+      [true, false, true, false],
+      "등산로",
+      "한 아저씨가 장뇌삼이 담긴 봉지를 들고 올라온다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 3,
+        "percentage": 100
+      },
+      {
+        "type": "event",
+        "number": 6,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "fields": [
+      0,
+      3,
+      [true, false, true, false],
+      "수풀이 우거진 곳",
+      "이 쪽엔 등산로가 없다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 16,
+    "fields": [
+      1,
+      3,
+      [false, true, true, false],
+      "멧돼지 출몰 구역",
+      "꾸에에에엑~~~~"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 2,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "fields": [
+      2,
+      3,
+      [true, false, true, true],
+      "멧돼지 출몰 구역",
+      "꾸에에에엑~~~~"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 2,
+        "percentage": 100
+      },
+      {
+        "type": "item",
+        "number": 1,
+        "percentage": 100
+      },
+      {
+        "type": "event",
+        "number": 7,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "fields": [3, 3, [true, true, false, false], "대피소", "따뜻하다."],
+    "contents": [
+      {
+        "type": "event",
+        "number": 8,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "fields": [
+      4,
+      3,
+      [true, false, true, true],
+      "등산로",
+      "내가 가는 이 길이 어디로 가는지~"
+    ],
+    "contents": []
+  },
+  {
+    "id": 20,
+    "fields": [
+      0,
+      4,
+      [false, true, true, false],
+      "버섯 군락",
+      "버섯이 엄청 많다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 9,
+        "percentage": 50
+      },
+      {
+        "type": "event",
+        "number": 10,
+        "percentage": 50
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "fields": [
+      1,
+      4,
+      [true, true, false, true],
+      "등산로 입구",
+      "산으로 이어지는 초입이다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 11,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "fields": [
+      2,
+      4,
+      [false, true, true, true],
+      "등산로",
+      "저 앞에 등산로 입구가 보인다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 23,
+    "fields": [3, 4, [false, true, true, true], "등산로", "꾸에에에엑~~~~"],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 2,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "fields": [4, 4, [false, false, true, true], "등산로 쉼터 헬스장", "읏-차"],
+    "contents": [
+      {
+        "type": "item",
+        "number": 2,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "fields": [
+      5,
+      0,
+      [true, true, false, false],
+      "라운지오",
+      "야~무지게 먹어야지~~"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 12,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "fields": [
+      6,
+      0,
+      [true, false, false, true],
+      "경영대 어딘가",
+      "수업이 끝난 학생들이 건물에서 나오고 있다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 27,
+    "fields": [
+      5,
+      1,
+      [true, true, true, false],
+      "경영대 어딘가",
+      "수업이 끝난 학생들이 건물에서 나오고 있다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 28,
+    "fields": [
+      6,
+      1,
+      [false, true, true, true],
+      "58동",
+      "D학점을 주신 전공 교수님과 눈이 마주쳤다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 100,
+        "percentage": 100
+      },
+      {
+        "type": "item",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "fields": [
+      5,
+      2,
+      [true, true, true, false],
+      "테니스장",
+      "구장에서 테니스 공이 날라온다."
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 100,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "fields": [
+      6,
+      2,
+      [true, false, false, true],
+      "경영대 잔디",
+      "해가 쨍쨍한 날이다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 31,
+    "fields": [
+      5,
+      3,
+      [true, true, true, false],
+      "16동",
+      "왠지 모르지만 매우 화가 난 것 같은 사람을 맞주쳤다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "fields": [
+      6,
+      3,
+      [true, true, true, true],
+      "16동",
+      "왠지 모르지만 매우 화가 난 것 같은 사람을 마주쳤다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "fields": [5, 4, [true, true, true, false], "두레미담", "계단이 많다."],
+    "contents": [
+      {
+        "type": "event",
+        "number": 13,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "fields": [
+      6,
+      4,
+      [true, false, false, true],
+      "IBK 커뮤니케이션 센터",
+      "정문이 보인다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 50,
+    "fields": [
+      0,
+      5,
+      [true, true, false, false],
+      "302동 옥상",
+      "학교 아래쪽에 교수님과 고시생들이 돌아다니는거 같다."
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 50,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "fields": [
+      1,
+      5,
+      [false, true, true, true],
+      "등산로 입구",
+      "관악산으로 들어가는 등산로의 입구다."
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 51,
+        "percentage": 100
+      },
+      {
+        "type": "event",
+        "number": 99,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "fields": [
+      2,
+      5,
+      [true, false, false, true],
+      "건설환경 종합 연구소",
+      "여기가 뭐 하는 건물이지?"
+    ],
+    "contents": []
+  },
+  {
+    "id": 53,
+    "fields": [3, 5, [true, true, false, false], "35동", "공대 건물이다."],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 50,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "fields": [
+      4,
+      5,
+      [true, false, false, true],
+      "공대 신양관",
+      "공대에도 카페가 있다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 50,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "fields": [
+      0,
+      6,
+      [true, false, true, false],
+      "302동 8층",
+      "8층은 옥상과 아래층으로 연결되어 있다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 50,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "fields": [
+      1,
+      6,
+      [false, true, false, false],
+      "편의점",
+      "치킨집 옆의 편의점이다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 51,
+        "percentage": 50
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "fields": [
+      2,
+      6,
+      [true, true, true, true],
+      "BHC 치킨 집",
+      "맛있는 치킨 냄새가 난다."
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 52,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "fields": [
+      3,
+      6,
+      [false, false, true, true],
+      "붉은 광장",
+      "공대 한 가운데 있는 광장이다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 52,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "fields": [
+      4,
+      6,
+      [false, false, true, true],
+      "43-1동",
+      "공대를 거의 빠져나온것 같다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 50,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "fields": [
+      0,
+      7,
+      [true, false, true, false],
+      "302동 4층",
+      "8층과 2층으로 연결되어 있다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 53,
+        "percentage": 100
+      },
+      {
+        "type": "item",
+        "number": 60,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "fields": [
+      1,
+      7,
+      [true, true, false, false],
+      "윗공대 산길",
+      "윗공대와 아랫공대를 연결하는 길이다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 61,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "fields": [
+      2,
+      7,
+      [false, false, true, true],
+      "농생대 식당",
+      "맛있는 농대 학식을 팔고 있다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 62,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "fields": [
+      3,
+      7,
+      [true, true, false, false],
+      "관정관",
+      "관정관 안으로 들어왔다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 63,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "fields": [
+      4,
+      7,
+      [false, false, true, true],
+      "도서관",
+      "많은 책들이 보관되어 있다."
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 64,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "fields": [
+      0,
+      8,
+      [true, true, true, false],
+      "302동 2층",
+      "1층과 4층으로 연결되어 있다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 65,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "fields": [
+      1,
+      8,
+      [true, false, true, true],
+      "윗공대 주차장",
+      "건물 앞에 모래바닥이 있다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 50,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "fields": [
+      2,
+      8,
+      [false, true, false, false],
+      "롯데리아 앞",
+      "오랜만에 동기를 만났다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": "67",
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "fields": [
+      3,
+      8,
+      [true, false, true, true],
+      "TwoSome Place",
+      "관정 뒤 카페에 들어갔다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 68,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "fields": [
+      4,
+      8,
+      [true, true, false, false],
+      "학생회관 내려가는 길",
+      "학생회관으로 내려가는 계단이다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 69,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "fields": [
+      0,
+      9,
+      [false, true, true, false],
+      "302동 1층",
+      "302동의 1층까지 내려왔다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 70,
+        "percentage": 100
+      },
+      {
+        "type": "item",
+        "number": 70,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "fields": [
+      1,
+      9,
+      [false, true, true, true],
+      "300동 입구",
+      "300동으로 들어가는 입구이다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 72,
+    "fields": [
+      2,
+      9,
+      [false, true, false, true],
+      "버들골",
+      "넓게 펼쳐진 풀밭이 보인다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 51,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "fields": [
+      3,
+      9,
+      [false, true, true, true],
+      "관정 앞 광장",
+      "관정 앞의 벤치와 넓은 광장이 보인다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 73,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "fields": [
+      4,
+      9,
+      [false, false, true, true],
+      "보건소",
+      "교내 보건소에 왔다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 74,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "fields": [
+      7,
+      0,
+      [false, true, false, false],
+      "서울대 입구역 내부",
+      "이제 집에 갈 수 있다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 80,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "fields": [
+      8,
+      0,
+      [false, true, false, true],
+      "서울대 입구역 내려가는 계단",
+      "앞에 술취했던 나를 관악산 정상에 버리고 갔던 누군가가 보인다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 54,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "fields": [
+      9,
+      0,
+      [true, false, false, true],
+      "대작",
+      "서울대 입구역의 술집이다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 99,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "fields": [
+      7,
+      1,
+      [true, false, false, true],
+      "대운동장",
+      "운동장에서 조깅하는 사람들이 보인다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 83,
+        "percentage": 100
+      },
+      {
+        "type": "item",
+        "number": 83,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "fields": [
+      8,
+      1,
+      [false, true, false, false],
+      "마라탕집",
+      "맵싸한 마라 향이 난다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 84,
+        "percentage": 50
+      },
+      {
+        "type": "event",
+        "number": 98,
+        "percentage": 50
+      },
+      {
+        "type": "event",
+        "number": 97,
+        "percentage": 50
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "fields": [
+      9,
+      1,
+      [true, false, true, true],
+      "서울대 입구역 거리",
+      "지나가는 사람들이 많이 보인다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 53,
+        "percentage": 90
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "fields": [
+      7,
+      2,
+      [false, true, true, false],
+      "경영대 편의점",
+      "늦은 시간이라 남은 물품이 별로 없다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 86,
+        "percentage": 50
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "fields": [
+      8,
+      2,
+      [true, true, false, true],
+      "서울대 정문",
+      "학교를 거의 다 나왔다."
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 87,
+        "percentage": 100
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "fields": [
+      9,
+      2,
+      [false, false, true, true],
+      "정문 버스 정류장",
+      "서울대 입구역으로 가는 버스가 오고 있다."
+    ],
+    "contents": []
+  },
+  {
+    "id": 100,
+    "fields": [
+      5,
+      9,
+      [false, true, true, false],
+      "학관 옆 흡연소",
+      "기분이 안좋아 보이는 사내가 갑자기 시비를 건다"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 101,
+    "fields": [
+      5,
+      8,
+      [true, true, true, true],
+      "학생 회관 앞",
+      "특별한 일은 없는 것 같다"
+    ]
+  },
+
+  {
+    "id": 102,
+    "fields": [
+      5,
+      7,
+      [true, true, true, false],
+      "중도 터널",
+      "건너편에서 뛰어오던 고시생과 어깨를 부딪혔다"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 103,
+    "fields": [
+      6,
+      9,
+      [false, true, true, true],
+      "학관 2층",
+      "특별한 일은 없는 것 같다"
+    ]
+  },
+
+  {
+    "id": 104,
+    "fields": [
+      6,
+      8,
+      [true, true, true, true],
+      "학관 식당",
+      "학관에서 점심을 먹는다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 100,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 105,
+    "fields": [
+      6,
+      7,
+      [true, true, true, true],
+      "행정관 앞",
+      "특별한 일은 없는 것 같다"
+    ]
+  },
+
+  {
+    "id": 106,
+    "fields": [
+      7,
+      9,
+      [false, true, true, true],
+      "학관 3층",
+      "발을 헛디뎌 계단에서 굴렀다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 107,
+    "fields": [
+      7,
+      8,
+      [true, true, true, true],
+      "사범대 가는길",
+      "날씨가 꽤 쌀쌀해졌다"
+    ]
+  },
+
+  {
+    "id": 108,
+    "fields": [
+      7,
+      7,
+      [true, true, true, true],
+      "인문대 근처 쉼터",
+      "잔뜩 화가난 남자와 눈을 마주쳐버렸다"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 109,
+    "fields": [
+      8,
+      9,
+      [false, true, true, true],
+      "사범대 파스쿠치 앞",
+      "날씨가 꽤 쌀쌀해졌다"
+    ]
+  },
+
+  {
+    "id": 110,
+    "fields": [
+      8,
+      8,
+      [true, true, true, true],
+      "사범대 12동 건물 안",
+      "경비 아저씨가 분실물이라며 롱패딩을 건내주신다"
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 111,
+    "fields": [
+      8,
+      7,
+      [true, true, true, true],
+      "인문대 가는 길",
+      "특별한 일은 없는 듯하다"
+    ]
+  },
+
+  {
+    "id": 112,
+    "fields": [
+      9,
+      9,
+      [false, false, true, true],
+      "노천광장 앞",
+      "킥보드가 내리막길을 타고 내려온다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 102,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 113,
+    "fields": [
+      9,
+      8,
+      [true, false, true, true],
+      "사범대 식당",
+      "사식에서 점심을 먹기로 한다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 103,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 114,
+    "fields": [
+      9,
+      7,
+      [true, false, true, true],
+      "인문대 가는 길",
+      "잔뜩 화가난 남자와 눈을 마주쳐버렸다"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 115,
+    "fields": [
+      5,
+      6,
+      [true, true, false, true],
+      "자하연 계단",
+      "오리가 무심하게 돌아다닌다"
+    ]
+  },
+
+  {
+    "id": 116,
+    "fields": [
+      5,
+      5,
+      [true, false, true, true],
+      "문화관 앞",
+      "플리마켓에서 따뜻한 롱패딩을 얻었다"
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 117,
+    "fields": [
+      6,
+      6,
+      [true, true, true, true],
+      "자하연 식당 앞",
+      "목이 말라서 느티나무를 들렀다 가기로 한다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 104,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 118,
+    "fields": [
+      6,
+      5,
+      [true, true, true, true],
+      "문화관 앞",
+      "누군가가 갑자기 뒤통수를 때린다. 뒤돌아보니 군시절 사이가 좋지 않았던 선임이다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 102,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 119,
+    "fields": [
+      7,
+      6,
+      [true, true, true, true],
+      "인문대 신양",
+      "경비 아저씨가 분실물이라며 롱패딩을 건내주신다"
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 120,
+    "fields": [
+      7,
+      5,
+      [true, true, true, true],
+      "예술계 식당 앞",
+      "봉사동아리 학생들이 퀴즈 이벤트을 열고 있다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 105,
+        "percentage": 50
+      },
+      {
+        "type": "event",
+        "number": 106,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 121,
+    "fields": [
+      8,
+      6,
+      [true, true, true, true],
+      "인문대 8동 가는 길",
+      "발을 헛디뎌 계단에서 굴렀다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 101,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 122,
+    "fields": [
+      8,
+      5,
+      [true, true, true, true],
+      "체육관 가는 길",
+      "특별한 일은 없는 듯하다"
+    ]
+  },
+
+  {
+    "id": 123,
+    "fields": [
+      9,
+      6,
+      [true, false, true, true],
+      "기초교육원 앞",
+      "특별한 일은 없는 듯하다"
+    ]
+  },
+
+  {
+    "id": 124,
+    "fields": [
+      9,
+      5,
+      [true, false, true, true],
+      "간호대학원 근처",
+      "누군가가 갑자기 뒤통수를 때린다. 뒤돌아보니 군시절 사이가 좋지 않았던 선임이다."
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 102,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 125,
+    "fields": [
+      7,
+      4,
+      [true, true, true, true],
+      "체육관 자판기 앞",
+      "음료수를 마시기 위해 잔돈을 털어 자판기에 넣는다"
+    ],
+    "contents": [
+      {
+        "type": "event",
+        "number": 108,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 126,
+    "fields": [
+      7,
+      3,
+      [true, false, true, true],
+      "포스코 수영장",
+      "수영장은 아직 휴관 중이다"
+    ]
+  },
+
+  {
+    "id": 127,
+    "fields": [
+      8,
+      4,
+      [true, true, false, true],
+      "체육관 안 농구장",
+      "오늘은 농구하는 사람들이 없다"
+    ]
+  },
+
+  {
+    "id": 128,
+    "fields": [
+      8,
+      3,
+      [false, true, true, true],
+      "포스코 헬스장",
+      "운동을 마친 교수님과 마주쳤다. 교수님이 다음주까지 보고서를 제출하라고 재촉하신다"
+    ],
+    "contents": [
+      {
+        "type": "battle",
+        "number": 100,
+        "percentage": 100
+      },
+
+      {
+        "type": "item",
+        "number": 102,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 129,
+    "fields": [
+      9,
+      4,
+      [true, false, true, true],
+      "체육관 안",
+      "쓸만한 게 있나 비품실을 뒤지다 상태가 좋은 라켓을 발견했다"
+    ],
+    "contents": [
+      {
+        "type": "item",
+        "number": 100,
+        "percentage": 100
+      }
+    ]
+  },
+
+  {
+    "id": 130,
+    "fields": [
+      9,
+      3,
+      [true, false, false, true],
+      "롯데국제관",
+      "이곳은 뭐하는 건물인지 아직도 모르겠다"
+    ]
+  }
+]

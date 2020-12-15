@@ -1,74 +1,151 @@
 <html>
-    <head>
-        <script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
-    </head>
 
-  <body>
-    <div id="position"></div>
+<head>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</head>
 
-    <div id="status">
-        HP: <span id="HP"> 5 / 5</span>
-    </div>
-    <div id="game"></div>
-    <div id="event_result"></div>
-    <div id="control">
-      <button value="1">동</button>
-      <button value="3">서</button>
-      <button value="2">남</button>
-      <button value="0">북</button>
-    </div>
+<body>
+  <div id="position"></div>
+  <div id="mapDescription"></div><br>
+  <div id="event_result"></div>
+
+  <div id="battle">
+    <span id="monsterName"></span><br>
+    몬스터 체력 <span id="mHP"> 0</span><br>
+    근력: <span id="mstr"> 0 </span> 방어력: <span id="mdef"> 0 </span> 지능: <span id="mint"> 0 </span>
+    <br>
+    <button id="runaway" value="runaway">도망가기</button>
+    <button id="nextTurn" value="nextTurn">다음 턴</button>
+  </div>
+  <br>
+  <div id="control">
+    <button id="moveSelection"></button>
+    <button id="nextEvent">다음 이벤트 확인</button>
+  </div>
+
+  <div id="status">
+    현재 체력 <span id="HP"> 0 | 0</span> 최대 체력 <br>
+    근력: <span id="str"> 0 </span> 방어력: <span id="def"> 0 </span> 지능: <span id="int"> 0 </span>
+  </div>
+
 
   <script>
-
-const sendAction = (action, params = {}) => {
+    const sendAction = (url, params = {}) => {
       $.ajax({
-        url: "/action",
+        url,
         headers: {
           Authorization: "Bearer " + key
         },
         method: "POST",
-        data: `action=${action}&direction=${params.direction}`,
+        data: $.param(params),
       }).done((req) => {
-        const { player, field, event } = req;
+        let send = false
+        const { monster, player, field, event, movAble } = req;
 
-        $('#game').text(field.description);
-        $('#position').text(`(${field.x},${field.y})`);
-        const x = field.x;
-        const y = field.y;
-        field.canGo.forEach((canGo, idx) => {
-          const dom = $(`button[value="${idx}"]`);
-          canGo === 0 ? dom.hide() : dom.show();
-          dom.unbind('click');
-          if (canGo === 1) {
-            dom.bind('click', function () {
-              sendAction('move', {direction: idx});
-            });
+        $('#mapDescription').text(field.description);
+        $('#position').text(`${field.mapName}  :  [${field.x} , ${field.y}]`);
+
+        let count = Number(req.count)
+
+        if (count < event.length ) {
+          console.log(`F1 :: event : [${event[count].content}], el : ${[event.length]} count : ${[count]}, monster : ${[monster]}`)
+        } else console.log('pointed final!')
+
+        $('#runaway').click(function () {
+          sendAction('/action', {action: 'runaway', plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, id: event[count - 1].id, count: count })
+        })
+
+        $('#nextTurn').off().click(function () {
+          console.log("monster: ");
+          console.log(monster);
+          sendAction('/action', { action: 'battle', count : count, mId: monster.mId, mHP: monster.hp, battleTurn: true });
+        })
+
+
+        $('#nextEvent').one('click', function () {
+          count += Number(1)
+          if (count <= event.length) {
+            if (event[count - 1].type === 'event') {
+              console.log("다음은 event");
+              sendAction('/action', { plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, action: event[count - 1].type, id: event[count - 1].id, count: count });
+            }
+            else if (event[count - 1].type === 'item') {
+              console.log("다음은 item");
+              sendAction('/item', { plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, action: event[count - 1].type, id: event[count - 1].id, count: count });
+            }
+            if (event[count -1].type === 'battle') {
+              console.log("다음은 battle");
+              sendAction('/action', {plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, action: event[count - 1].type, id: event[count - 1].id, count: count});
+            }
           }
         })
 
-        if (event) {
-          $('#event_result').text(event.description);
+
+        $('#moveSelection').html('');
+        req.movAble.forEach((action) => {
+          //console.log(action)
+          const dom = $('<button></button');
+          dom.text(action.text);
+          dom.bind('click', function () {
+            sendAction(action.url, action.params, count);
+          });
+          $('#moveSelection').append(dom);
+        })
+
+        let currentShowing = count - 1
+
+        if (count !== 0 && 0 < event.length && event[currentShowing].type === 'battle') {
+          console.log('showing battle')
+          $('#event_result').text("전투에 돌입했습니다.");
+          $('#monsterName').html(`${monster.name}`);
+          $('#mstr').html(`${monster.str}`);
+          $('#mdef').html(`${monster.def}`);
+          $('#mint').html(`${monster.int}`);
+          $('#mHP').html(`${monster.hp}`);
+          $('#battle').show()
+          if(count === event.length){
+            $('#moveSelection').show()
+            $('#nextEvent').hide()
+          } 
+          else {
+            $('#moveSelection').hide()
+            $('#nextEvent').show()
+          }
+        } else if (!(count < event.length)) {
+          console.log('moving')
+          $('#battle').hide()
+          $('#nextEvent').hide()
+          $('#moveSelection').show()
         } else {
-          $('#event_result').text("아무일도 일어나지 않았다.");
+          console.log('showing nextE')
+          $('#battle').hide()
+          $('#nextEvent').show()
+          $('#moveSelection').hide()
+        }
+
+        if (count !== 0 && 0 < event.length && event[currentShowing].type === 'event') $('#event_result').text(event[currentShowing].content)
+        else if (count !== 0 && 0 < event.length && event[currentShowing].type === 'item') $('#event_result').text(`아이템 :  [${event[currentShowing].name}] 발견!`)
+        else {
+          $('#event_result').text("새로운 장소로 이동했다.");
         }
 
         $('#HP').text(`${player.HP} / ${player.maxHP}`)
-      });
+        $('#str').text(`${player.str}`)
+        $('#int').text(`${player.int}`)
+        $('#def').text(`${player.def}`)
 
-    } 
+        console.log('--------')
+      });
+    }
     const key = localStorage.getItem('_key');
     if (!key) {
       location.href = "/";
     }
-
-    sendAction("query");
-
-    
+    //localStorage.clear()
+    sendAction("/action", { action: 'query' });
 
   </script>
-  </body>
-</html>
+</body>
 
+</html>
