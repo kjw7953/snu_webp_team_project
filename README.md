@@ -49,3 +49,9 @@
 
 ## 코드샌드박스 링크 
 https://codesandbox.io/s/snuweb-teamproject-team6-p7gs6?file=/src/views/game.ejs
+
+## 팀원 연락처
+
+- 김준평 : junepay@snu.ac.kr
+- 김형우 : khwoo8181@snu.ac.kr
+- 김정우 : kjw7953@snu.ac.kr
