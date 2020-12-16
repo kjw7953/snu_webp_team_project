@@ -15,8 +15,10 @@
     몬스터 체력 <span id="mHP"> 0</span><br>
     근력: <span id="mstr"> 0 </span> 방어력: <span id="mdef"> 0 </span> 지능: <span id="mint"> 0 </span>
     <br>
-    <button id="runaway" value="runaway">도망가기</button>
-    <button id="nextTurn" value="nextTurn">다음 턴</button>
+    <div id="battle-control">
+      <button id="runaway" value="runaway">도망가기</button>
+      <button id="nextTurn" value="nextTurn">다음 턴</button>
+    </div>
   </div>
   <br>
   <div id="control">
@@ -25,8 +27,13 @@
   </div>
 
   <div id="status">
+    레벨  <span id ="LV">  1 / 경험치: 1 </span> <br>
     현재 체력 <span id="HP"> 0 | 0</span> 최대 체력 <br>
     근력: <span id="str"> 0 </span> 방어력: <span id="def"> 0 </span> 지능: <span id="int"> 0 </span>
+  </div>
+  <br>
+  <div id="item">
+
   </div>
 
 
@@ -40,28 +47,37 @@
         method: "POST",
         data: $.param(params),
       }).done((req) => {
-        let send = false
-        const { monster, player, field, event, movAble } = req;
+        let send = false;
+        const { monster, player, field, event, movAble, str } = req;
+        let count = Number(req.count);
+        console.log(`count: ${count}`);
+
+        // if (event[count].type === "battle") $('#control').hide();
+        // else $('#control').show();
 
         $('#mapDescription').text(field.description);
         $('#position').text(`${field.mapName}  :  [${field.x} , ${field.y}]`);
-
-        let count = Number(req.count)
 
         if (count < event.length ) {
           console.log(`F1 :: event : [${event[count].content}], el : ${[event.length]} count : ${[count]}, monster : ${[monster]}`)
         } else console.log('pointed final!')
 
-        $('#runaway').click(function () {
-          sendAction('/action', {action: 'runaway', plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, id: event[count - 1].id, count: count })
+        $('#runaway').off().click(function () {
+          console.log(event);
+          console.log(count);
+          console.log(event[count-1]);
+          sendAction('/action', {action: 'runaway', plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, count: count })
         })
 
         $('#nextTurn').off().click(function () {
           console.log("monster: ");
           console.log(monster);
-          sendAction('/action', { action: 'battle', count : count, mId: monster.mId, mHP: monster.hp, battleTurn: true });
+          if (monster.hp <= 0) {
+            sendAction('/action', { action: 'battle', count : count, mId: monster.mId, mHP: monster.hp, battleTurn: false });
+          } else {
+            sendAction('/action', { action: 'battle', count : count, mId: monster.mId, mHP: monster.hp, battleTurn: true });
+          }
         })
-
 
         $('#nextEvent').one('click', function () {
           count += Number(1)
@@ -76,7 +92,7 @@
             }
             if (event[count -1].type === 'battle') {
               console.log("다음은 battle");
-              sendAction('/action', {plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, action: event[count - 1].type, id: event[count - 1].id, count: count});
+              sendAction('/action', {plyaer: req.plyaer, field: req.field, event: req.event, movAble: req.movAble, action: event[count - 1].type, id: event[count - 1].id, count: count, battleTrue: true});
             }
           }
         })
@@ -97,15 +113,26 @@
 
         if (count !== 0 && 0 < event.length && event[currentShowing].type === 'battle') {
           console.log('showing battle')
-          $('#event_result').text("전투에 돌입했습니다.");
+          $('#moveSelection').hide();
+          if (monster.hp <= 0) {
+            $('#event_result').text(`전투에 승리하였습니다. ${monster.exp}의 경험치를 얻었습니다.`);
+            $('#mHP').html("0");
+            $('#battle-control').hide();
+            $('#moveSelection').show();
+          } else {
+            $('#event_result').text("전투에 돌입했습니다.");
+            $('#mHP').html(`${monster.hp}`);
+            $('#battle-control').hide();
+            $('#moveSelection').hide();
+          }
           $('#monsterName').html(`${monster.name}`);
           $('#mstr').html(`${monster.str}`);
           $('#mdef').html(`${monster.def}`);
           $('#mint').html(`${monster.int}`);
-          $('#mHP').html(`${monster.hp}`);
           $('#battle').show()
+          
           if(count === event.length){
-            $('#moveSelection').show()
+            // $('#moveSelection').show()
             $('#nextEvent').hide()
           } 
           else {
@@ -127,13 +154,21 @@
         if (count !== 0 && 0 < event.length && event[currentShowing].type === 'event') $('#event_result').text(event[currentShowing].content)
         else if (count !== 0 && 0 < event.length && event[currentShowing].type === 'item') $('#event_result').text(`아이템 :  [${event[currentShowing].name}] 발견!`)
         else {
-          $('#event_result').text("새로운 장소로 이동했다.");
+          if (monster && monster.hp <= 0) {
+            $('#event_result').text(`전투에 승리하였습니다. ${monster.exp}의 경험치를 얻었습니다.`);
+            $('#battle-control').hide();
+          }
+          else {
+            $('#event_result').text("새로운 장소로 이동했다.");
+            $('#battle-control').show();
+          }
         }
-
+        $('#LV').text(`${player.level} 경험치 ${player.exp}`)
         $('#HP').text(`${player.HP} / ${player.maxHP}`)
         $('#str').text(`${player.str}`)
         $('#int').text(`${player.int}`)
         $('#def').text(`${player.def}`)
+        $('#item').html(`${str}`)
 
         console.log('--------')
       });

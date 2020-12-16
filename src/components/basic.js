@@ -42,7 +42,7 @@ module.exports = function () {
       if (indvEvents.type === "event") {
         resultEvent = eventManager.getEvent(indvEvents.number);
         resultEvent["type"] = "event";
-        resultEvent["percentage"] = indvEvents["percentage"];
+        resultEvent["percentage"] = indvEvents.percentage
         returnValue.push(resultEvent);
       } else if (indvEvents.type === "battle") {
         resultEvent["type"] = "battle";
@@ -106,10 +106,15 @@ module.exports = function () {
 
         if (player.HP <= 0) {
           console.log("플레이어 사망");
+          let x = player.x;
+          let y = player.y;
           player.x = player.checkPointX;
           player.y = player.checkPointY;
+          player.beforex = x;
+          player.beforey = y;
           player.HP = player.maxHP;
-          return;
+          player.save();
+          return -1;
         }
 
         console.log(`<< 유저의 공격 >>`);
@@ -130,34 +135,7 @@ module.exports = function () {
           monster.hp -= damage;
         });
 
-        if (monster.hp <= 0) {
-          console.log("몬스터 사망");
-          player.exp += monster.exp;
-          if (player.exp / (5 + player.level) >= 1) {
-            console.log("레벨업");
-            player.exp %= 5 + player.level;
-            player.level++;
-
-            let stat = Math.floor(Math.random() * 3) + 1;
-            switch (stat) {
-              case 1:
-                player.str++;
-                break;
-              case 2:
-                player.def++;
-                break;
-              case 3:
-                player.int++;
-                break;
-              default:
-                break;
-            }
-            player.maxHP++;
-            const recovery = Math.ceil(player.maxHP * (40 / 100));
-            if (player.HP + recovery >= player.maxHP) playerHP = player.maxHP;
-            else player.HP += recovery;
-          }
-        } else {
+        if (monster.hp > 0) {
           console.log(`<< 몬스터의 공격 >>`);
           await sleep(500).then(() => {
             let damage = getDamage(monster, player);
@@ -177,6 +155,34 @@ module.exports = function () {
           }
         }
       }
+      if (monster.hp <= 0) {
+        console.log("몬스터 사망");
+        player.exp += monster.exp;
+        if (player.exp / (5 + player.level) >= 1) {
+          console.log("레벨업");
+          player.exp %= 5 + player.level;
+          player.level++;
+
+          let stat = Math.floor(Math.random() * 3) + 1;
+          switch (stat) {
+            case 1:
+              player.str++;
+              break;
+            case 2:
+              player.def++;
+              break;
+            case 3:
+              player.int++;
+              break;
+            default:
+              break;
+          }
+          player.maxHP++;
+          const recovery = Math.ceil(player.maxHP * (40 / 100));
+          if (player.HP + recovery >= player.maxHP) player.HP = player.maxHP;
+          else player.HP += recovery;
+        }
+      }
       console.log(`플레이어 체력: ${player.HP}, 몬스터 체력: ${monster.hp}`);
       console.log();
 
@@ -184,55 +190,48 @@ module.exports = function () {
       console.log(monster);
       return monster;
     }
-
-    const canRun = () => {
-
-    }
-
     if (type === "battle") return battle(mId, player, mHP);
-    else if (type === "canRun") canRun();
   };
   
-  this.itemHandler = (type, id, player) => {
-    if (type === "get") {
-      const getItem = async (id, player) => {
-        // id = item.id, name = player.name
+  this.itemHandler = (type, player, id) => {
+    const getItem = async (player, id) => {
+      // id = item.id, name = player.name
 
-        const isHave = player.items.filter((item) => item === Number(id));
+      const isHave = player.items.filter((item) => item === Number(id));
 
-        if (isHave.length > 0) {
-          console.log("이미 있어유");
-          return;
-        }
-        const item = await itemManager.getItem(id);
-        console.log(`${item.name}을 얻었다.`);
-      
-        Object.keys(item)
-          .slice(1)
-          .forEach((stat) => {
-            if (item[stat] !== undefined) {
-              console.log(`${stat} 올라갑니다`);
-              player[stat] += item[stat];
-            }
-          });
-      
-        player.items.push(id);
-        await player.save();
-      };
-      getItem(id, player);
-    }
-    else {
-      const loseItem = async (id, player) => {
-        const item = await player.items.find((item) => item === id);
-        if (item === undefined) {
-          return;
-        }
-
-        
-
-
-
+      if (isHave.length > 0) {
+        console.log("이미 있어유");
+        return;
       }
+      const item = await itemManager.getItem(id);
+      console.log(`${item.name}을 얻었다.`);
+    
+      Object.keys(item)
+        .slice(1)
+        .forEach((stat) => {
+          if (item[stat] !== undefined) {
+            console.log(`${stat} 올라갑니다`);
+            player[stat] += item[stat];
+          }
+        });
+    
+      player.items.push(id);
+      await player.save();
+    };
+    
+  
+    const loseItem = async (player) => {
+      const items = player.items;
+      const idx = Math.floor(Math.random() * items.length)
+      console.log(itemManager.getItem(idx));
+      console.log("분실");
+      const resultItems = items.filter(item => item !== idx);
+
+      player.items = resultItems;
+      await player.save();
     }
+
+    if (type === "get") getItem(player, id);
+    else if (type === "lose") loseItem(player);
   }
 };

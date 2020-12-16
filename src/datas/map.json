@@ -201,7 +201,7 @@
     "contents": [
       {
         "type": "battle",
-        "number": 2,
+        "number": 1,
         "percentage": 100
       }
     ]
@@ -302,7 +302,13 @@
   },
   {
     "id": 18,
-    "fields": [3, 3, [true, true, false, false], "대피소 : 해발고도 410m", "따뜻하다."],
+    "fields": [
+      3,
+      3,
+      [true, true, false, false],
+      "대피소 : 해발고도 410m",
+      "따뜻하다."
+    ],
     "contents": [
       {
         "type": "event",
@@ -374,7 +380,13 @@
   },
   {
     "id": 23,
-    "fields": [3, 4, [false, true, true, true], "윗공대 건물이 보이는 곳", "꾸에에에엑~~~~"],
+    "fields": [
+      3,
+      4,
+      [false, true, true, true],
+      "윗공대 건물이 보이는 곳 : 340m",
+      "꾸에에에엑~~~~"
+    ],
     "contents": [
       {
         "type": "battle",
@@ -537,7 +549,13 @@
       "IBK 커뮤니케이션 센터",
       "정문이 보인다."
     ],
-    "contents": []
+    "contents": [
+      {
+        "type": "event",
+        "number": 109,
+        "percentage": 100
+      }
+    ]
   },
   {
     "id": 50,
@@ -737,6 +755,11 @@
       {
         "type": "event",
         "number": 61,
+        "percentage": 100
+      },
+      {
+        "type": "battle",
+        "number": 51,
         "percentage": 100
       }
     ]

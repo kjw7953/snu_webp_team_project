@@ -76,9 +76,15 @@ class MonsterManager extends Manager {
       };
     });
   }
+  mHP = null;
 
   getMonster(id) {
+    if (!this.mHP) this.mHP = this.monsters[id].hp;
     return this.monsters[id];
+  }
+
+  getOriginalHP() {
+    return this.mHP;
   }
 }
 
